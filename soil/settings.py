@@ -1,3 +1,19 @@
+#
+# This source file is proprietay property of Seung-jin Kim (seungjin@seungjin.net)
+#
+# Project: Project Soil 
+# Author: Seung-jin Kim (seungjin@seungjin.net)
+# Twitter: @seungjin.net
+# github: https://github.com/seungjin/soil
+#
+#
+
+
+from ConfigParser import RawConfigParser
+config = RawConfigParser()
+config.read('/Users/seungjin/Documents/soil_home/credentials.ini')
+
+
 # Django settings for soil project.
 
 DEBUG = True
@@ -11,12 +27,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.'+config.get('database','DATABASE_ENGINE'), # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': config.get('database', 'DATABASE_NAME'),                      # Or path to database file if using sqlite3.
+        'USER': config.get('database', 'DATABASE_USER'),                      # Not used with sqlite3.
+        'PASSWORD': config.get('database', 'DATABASE_PASSWORD'),                  # Not used with sqlite3.
+        'HOST': config.get('database', 'DATABASE_HOST'),                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': config.get('database', 'DATABASE_PORT'),                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -27,7 +43,7 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = config.get('timezone','TIME_ZONE')
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -83,7 +99,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'tl%@5*xccux9v)**6pi=q4t$4zgzhq8(b)8d(*rweslsbl%@23'
+SECRET_KEY = config.get('secret','SECRET_KEY')
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
