@@ -3,3 +3,4 @@ ENV
 *~
 *.pyc
 soil/logs/*
+credentials.ini
